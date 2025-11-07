@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teknik Relaksasi untuk Mengurangi Stres - MindMirror</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .article-hero {
+            background: linear-gradient(135deg, rgba(10, 10, 26, 0.9) 0%, rgba(26, 26, 46, 0.8) 100%);
+            padding: 120px 0 60px;
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .article-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80') center/cover;
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        .article-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .article-meta i {
+            margin-right: 8px;
+            color: var(--primary-color);
+        }
+
+        .article-content {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 50px;
+            margin-bottom: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .article-section {
+            margin-bottom: 40px;
+        }
+
+        .article-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            border-left: 4px solid var(--primary-color);
+            padding-left: 15px;
+        }
+
+        .article-section h3 {
+            color: var(--text-primary);
+            margin: 25px 0 15px;
+            font-size: 1.3rem;
+        }
+
+        .article-section p {
+            line-height: 1.8;
+            margin-bottom: 15px;
+            color: var(--text-secondary);
+        }
+
+        .technique-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .technique-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .technique-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .technique-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary-color);
+            box-shadow: 0 15px 40px rgba(0, 243, 255, 0.2);
+        }
+
+        .technique-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .technique-icon {
+            font-size: 2.5rem;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--bg-dark);
+        }
+
+        .technique-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .technique-steps {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .technique-steps ol {
+            padding-left: 20px;
+            margin: 15px 0;
+        }
+
+        .technique-steps li {
+            margin-bottom: 10px;
+        }
+
+        .benefit-box {
+            background: linear-gradient(135deg, rgba(0, 243, 255, 0.1), rgba(123, 97, 255, 0.1));
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+            border: 1px solid rgba(0, 243, 255, 0.2);
+        }
+
+        .benefit-box h4 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+        }
+
+        .benefit-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+        }
+
+        .benefit-item i {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        .quick-tip {
+            background: rgba(241, 196, 15, 0.1);
+            border-left: 4px solid #f1c40f;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .quick-tip h4 {
+            color: #f1c40f;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .practice-schedule {
+            background: rgba(46, 204, 113, 0.1);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+            border: 1px solid rgba(46, 204, 113, 0.3);
+        }
+
+        .practice-schedule h4 {
+            color: #2ecc71;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .schedule-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .schedule-time {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .schedule-activity {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+        }
+
+        .nav-button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 25px;
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover {
+            border-color: var(--primary-color);
+            transform: translateX(-5px);
+        }
+
+        .nav-button.next {
+            margin-left: auto;
+        }
+
+        .nav-button.next:hover {
+            transform: translateX(5px);
+        }
+
+        @media (max-width: 768px) {
+            .article-content {
+                padding: 30px 20px;
+            }
+
+            .technique-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .benefit-list {
+                grid-template-columns: 1fr;
+            }
+
+            .schedule-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-button {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="bg-animation">
+        <div class="stars"></div>
+        <div class="twinkling"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html" style="text-decoration: none;">
+                    <span class="logo-text">MindMirror</span>
+                </a>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html#home" class="nav-link">Beranda</a>
+                <a href="index.html#analyzer" class="nav-link">Analisis</a>
+                <a href="index.html#articles" class="nav-link">Artikel</a>
+                <a href="index.html#team" class="nav-link">Tim Kami</a>
+            </div>
+            <div class="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Article Hero -->
+    <section class="article-hero">
+        <div class="article-container">
+            <h1 class="title-main" style="font-size: 3rem; margin-bottom: 20px;">Teknik Relaksasi untuk Mengurangi Stres</h1>
+            <p class="hero-description" style="font-size: 1.3rem; max-width: 600px; margin: 0 auto;">
+                Panduan praktis teknik relaksasi yang terbukti secara ilmiah untuk mengelola stres dan meningkatkan kesejahteraan mental.
+            </p>
+        </div>
+    </section>
+
+    <!-- Article Content -->
+    <div class="article-container">
+        <article class="article-content">
+            <div class="article-section">
+                <h2>Mengapa Relaksasi Penting untuk Kesehatan Mental?</h2>
+                <p>Stres telah menjadi bagian tak terhindarkan dari kehidupan modern. Namun, ketika stres tidak dikelola dengan baik, dampaknya dapat merugikan kesehatan mental dan fisik. Teknik relaksasi adalah alat yang powerful untuk mengembalikan keseimbangan tubuh dan pikiran.</p>
+                
+                <p>Penelitian menunjukkan bahwa praktik relaksasi teratur dapat menurunkan tingkat kortisol (hormon stres), menurunkan tekanan darah, meningkatkan kualitas tidur, dan meningkatkan fungsi kognitif. Mari jelajahi berbagai teknik relaksasi yang dapat Anda praktikkan sehari-hari.</p>
+            </div>
+
+            <div class="benefit-box">
+                <h4><i class="fas fa-heartbeat"></i> Manfaat Rutin Relaksasi</h4>
+                <div class="benefit-list">
+                    <div class="benefit-item">
+                        <i class="fas fa-brain"></i>
+                        <span>Meningkatkan fokus dan konsentrasi</span>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-bed"></i>
+                        <span>Memperbaiki kualitas tidur</span>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Meningkatkan sistem imun</span>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-smile"></i>
+                        <span>Meningkatkan mood dan energi</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-section">
+                <h2>7 Teknik Relaksasi yang Terbukti Efektif</h2>
+                
+                <div class="technique-grid">
+                    <!-- Technique 1: Deep Breathing -->
+                    <div class="technique-card">
+                        <div class="technique-header">
+                            <div class="technique-icon">
+                                <i class="fas fa-wind"></i>
+                            </div>
+                            <h3 class="technique-title">Pernapasan Dalam</h3>
+                        </div>
+                        <div class="technique-steps">
+                            <p><strong>Waktu:</strong> 3-5 menit</p>
+                            <ol>
+                                <li>Duduk atau berbaring dengan nyaman</li>
+                                <li>Tarik napas melalui hidung selama 4 hitungan</li>
+                                <li>Tahan napas selama 4 hitungan</li>
+                                <li>Hembuskan melalui mulut selama 6 hitungan</li>
+                                <li>Ulangi 5-10 kali</li>
+                            </ol>
+                            <p><strong>Manfaat:</strong> Menenangkan sistem saraf, mengurangi kecemasan instan.</p>
+                        </div>
+                    </div>
+
+                    <!-- Technique 2: Progressive Muscle Relaxation -->
+                    <div class="technique-card">
+                        <div class="technique-header">
+                            <div class="technique-icon">
+                                <i class="fas fa-hands"></i>
+                            </div>
+                            <h3 class="technique-title">Relaksasi Otot Progresif</h3>
+                        </div>
+                        <div class="technique-steps">
+                            <p><strong>Waktu:</strong> 10-15 menit</p>
+                            <ol>
+                                <li>Mulai dari jari kaki, tegangkan selama 5 detik</li>
+                                <li>Lepaskan ketegangan secara perlahan</li>
+                                <li>Naik ke betis, paha, dan seterusnya</li>
+                                <li>Teruskan hingga mencapai wajah</li>
+                                <li>Rasakan perbedaan antara tegang dan rileks</li>
+                            </ol>
+                            <p><strong>Manfaat:</strong> Melepaskan ketegangan fisik, meningkatkan kesadaran tubuh.</p>
+                        </div>
+                    </div>
+
+                    <!-- Technique 3: Mindfulness Meditation -->
+                    <div class="technique-card">
+                        <div class="technique-header">
+                            <div class="technique-icon">
+                                <i class="fas fa-spa"></i>
+                            </div>
+                            <h3 class="technique-title">Meditasi Mindfulness</h3>
+                        </div>
+                        <div class="technique-steps">
+                            <p><strong>Waktu:</strong> 10-20 menit</p>
+                            <ol>
+                                <li>Cari posisi duduk yang nyaman</li>
+                                <li>Fokus pada napas yang masuk dan keluar</li>
+                                <li>Ketika pikiran mengembara, sadari dan kembali ke napas</li>
+                                <li>Perhatikan sensasi tubuh tanpa menghakimi</li>
+                                <li>Praktikkan penerimaan terhadap pengalaman saat ini</li>
+                            </ol>
+                            <p><strong>Manfaat:</strong> Meningkatkan kesadaran, mengurangi overthinking.</p>
+                        </div>
+                    </div>
+
+                    <!-- Technique 4: Guided Imagery -->
+                    <div class="technique-card">
+                        <div class="technique-header">
+                            <div class="technique-icon">
+                                <i class="fas fa-mountain"></i>
+                            </div>
+                            <h3 class="technique-title">Visualisasi Terpandu</h3>
+                        </div>
+                        <div class="technique-steps">
+                            <p><strong>Waktu:</strong> 5-10 menit</p>
+                            <ol>
+                                <li>Tutup mata dan bayangkan tempat yang tenang</li>
+                                <li>Libatkan semua indera dalam visualisasi</li>
+                                <li>Rasakan kedamaian di tempat tersebut</li>
+                                <li>Habiskan 5-10 menit mengeksplorasi tempat ini</li>
+                                <li>Kembali secara perlahan ke kesadaran normal</li>
+                            </ol>
+                            <p><strong>Manfaat:</strong> Mengalihkan pikiran dari stres, menciptakan ketenangan mental.</p>
+                        </div>
+                    </div>
+
+                    <!-- Technique 5: Yoga -->
+                    <div class="technique-card">
+                        <div class="technique-header">
+                            <div class="technique-icon">
+                                <i class="fas fa-child"></i>
+                            </div>
+                            <h3 class="technique-title">Yoga Ringan</h3>
+                        </div>
+                        <div class="technique-steps">
+                            <p><strong>Waktu:</strong> 15-30 menit</p>
+                            <ol>
+                                <li>Mulai dengan pose child's pose</li>
+                                <li>Lanjutkan dengan cat-cow stretch</li>
+                                <li>Praktikkan standing forward bend</li>
+                                <li>Lakukan gentle twists</li>
+                                <li>Akhiri dengan savasana (pose mayat)</li>
+                            </ol>
+                            <p><strong>Manfaat:</strong> Melepaskan ketegangan, meningkatkan fleksibilitas dan sirkulasi.</p>
+                        </div>
+                    </div>
+
+                    <!-- Technique 6: Journaling -->
+                    <div class="technique-card">
+                        <div class="technique-header">
+                            <div class="technique-icon">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <h3 class="technique-title">Journaling Terapeutik</h3>
+                        </div>
+                        <div class="technique-steps">
+                            <p><strong>Waktu:</strong> 10-15 menit</p>
+                            <ol>
+                                <li>Tuliskan pikiran dan perasaan tanpa filter</li>
+                                <li>Eksplorasi sumber stres yang dialami</li>
+                                <li>Tuliskan hal-hal yang disyukuri</li>
+                                <li>Refleksikan pelajaran yang didapat</li>
+                                <li>Tutup dengan afirmasi positif</li>
+                            </ol>
+                            <p><strong>Manfaat:</strong> Memproses emosi, mendapatkan kejelasan pikiran.</p>
+                        </div>
+                    </div>
+
+                    <!-- Technique 7: Aromatherapy -->
+                    <div class="technique-card">
+                        <div class="technique-header">
+                            <div class="technique-icon">
+                                <i class="fas fa-feather-alt"></i>
+                            </div>
+                            <h3 class="technique-title">Aromaterapi</h3>
+                        </div>
+                        <div class="technique-steps">
+                            <p><strong>Waktu:</strong> Sesuai kebutuhan</p>
+                            <ol>
+                                <li>Pilih essential oil yang menenangkan</li>
+                                <li>Gunakan diffuser atau inhalasi langsung</li>
+                                <li>Coba lavender untuk relaksasi</li>
+                                <li>Peppermint untuk energi dan fokus</li>
+                                <li>Chamomile untuk ketenangan</li>
+                            </ol>
+                            <p><strong>Manfaat:</strong> Menenangkan sistem limbik, meningkatkan mood secara instan.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quick-tip">
+                <h4><i class="fas fa-lightbulb"></i> Tips Cepat Redakan Stres dalam 60 Detik</h4>
+                <p><strong>Teknik 4-7-8:</strong> Tarik napas 4 detik, tahan 7 detik, hembuskan 8 detik. Ulangi 3-4 kali. Teknik ini dapat menenangkan sistem saraf dengan cepat dan dapat dilakukan di mana saja.</p>
+            </div>
+
+            <div class="article-section">
+                <h2>Membangun Rutinitas Relaksasi yang Berkelanjutan</h2>
+                
+                <h3>Jadwal Praktik Harian yang Disarankan</h3>
+                <div class="practice-schedule">
+                    <h4><i class="fas fa-calendar-alt"></i> Contoh Jadwal Harian</h4>
+                    <div class="schedule-grid">
+                        <div class="schedule-item">
+                            <div class="schedule-time">Pagi (5 menit)</div>
+                            <div class="schedule-activity">Pernapasan Dalam + Affirmasi</div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">Siang (3 menit)</div>
+                            <div class="schedule-activity">Quick Mindfulness Break</div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">Sore (10 menit)</div>
+                            <div class="schedule-activity">Yoga Ringan atau Jalan Kaki</div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">Malam (15 menit)</div>
+                            <div class="schedule-activity">Journaling + Meditasi</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Mengatasi Hambatan dalam Praktik Relaksasi</h3>
+                <p>Banyak orang mengalami kesulitan konsistensi dalam praktik relaksasi. Berikut solusi untuk hambatan umum:</p>
+                
+                <div class="benefit-list">
+                    <div class="benefit-item">
+                        <i class="fas fa-clock"></i>
+                        <span><strong>Tidak ada waktu:</strong> Mulai dengan 2-3 menit sehari, tingkatkan secara bertahap</span>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-brain"></i>
+                        <span><strong>Pikiran tidak bisa diam:</strong> Itu normal! Terus bawa perhatian kembali ke napas</span>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-couch"></i>
+                        <span><strong>Malas memulai:</strong> Gabungkan dengan aktivitas yang sudah rutin (setelah mandi, sebelum tidur)</span>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-question-circle"></i>
+                        <span><strong>Tidak yakin cara melakukannya:</strong> Gunakan aplikasi panduan atau video tutorial</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-section">
+                <h2>Kapan Mencari Bantuan Profesional?</h2>
+                <p>Meskipun teknik relaksasi sangat efektif untuk mengelola stres sehari-hari, penting untuk mengenali ketika Anda mungkin membutuhkan bantuan profesional. Pertimbangkan untuk berkonsultasi dengan ahli jika:</p>
+                
+                <ul style="color: var(--text-secondary); line-height: 1.8; margin: 15px 0; padding-left: 20px;">
+                    <li>Stres mengganggu fungsi sehari-hari secara signifikan</li>
+                    <li>Mengalami gejala fisik yang persisten (sakit kepala, gangguan pencernaan)</li>
+                    <li>Merasa kewalahan atau putus asa secara konsisten</li>
+                    <li>Mengalami gangguan tidur yang berkelanjutan</li>
+                    <li>Menggunakan zat atau alkohol untuk mengatasi stres</li>
+                </ul>
+            </div>
+
+            <div class="article-section">
+                <h2>Kesimpulan</h2>
+                <p>Teknik relaksasi adalah investasi berharga untuk kesehatan mental Anda. Seperti keterampilan lainnya, konsistensi adalah kunci. Mulailah dengan teknik yang paling menarik bagi Anda, praktikkan secara teratur, dan perhatikan bagaimana kualitas hidup Anda meningkat seiring waktu.</p>
+                
+                <p>Ingatlah bahwa relaksasi bukanlah kemewahan, tetapi kebutuhan untuk menjaga keseimbangan dalam kehidupan yang penuh tantangan. Setiap menit yang Anda investasikan untuk relaksasi akan memberikan pengembalian yang berlipat ganda dalam bentuk ketenangan, kejernihan pikiran, dan vitalitas.</p>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="navigation-buttons">
+                <a href="article-emosi.html" class="nav-button">
+                    <i class="fas fa-arrow-left"></i>
+                    Artikel Sebelumnya
+                </a>
+                <a href="article-dukungan-sosial.html" class="nav-button next">
+                    Artikel Selanjutnya
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </article>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>MindMirror</h3>
+                <p>Platform analisis kesehatan mental berbasis AI yang membantu Anda memahami kondisi emosional.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="index.html#home">Beranda</a>
+                <a href="index.html#analyzer">Analisis</a>
+                <a href="index.html#articles">Artikel</a>
+                <a href="index.html#team">Tim Kami</a>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <a href="#">Blog</a>
+                <a href="#">Documentation</a>
+                <a href="#">Support</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p><i class="fas fa-envelope"></i> hello@mindmirror.com</p>
+                <p><i class="fas fa-phone"></i> +62 21 1234 5678</p>
+                <p><i class="fas fa-map-marker-alt"></i> Malang, Indonesia</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Made with <span class="heart">💙</span> for Mental Health Awareness | &copy; 2025 MindMirror. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation functionality for article page
+        document.addEventListener('DOMContentLoaded', function() {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (navToggle) {
+                navToggle.addEventListener('click', function() {
+                    navMenu.classList.toggle('active');
+                    navToggle.classList.toggle('active');
+                    
+                    const bars = document.querySelectorAll('.bar');
+                    if (navMenu.classList.contains('active')) {
+                        bars[0].style.transform = 'rotate(-45deg) translate(-5px, 6px)';
+                        bars[1].style.opacity = '0';
+                        bars[2].style.transform = 'rotate(45deg) translate(-5px, -6px)';
+                    } else {
+                        bars[0].style.transform = 'none';
+                        bars[1].style.opacity = '1';
+                        bars[2].style.transform = 'none';
+                    }
+                });
+            }
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    
+                    if (targetId.includes('index.html')) {
+                        window.location.href = targetId;
+                    } else {
+                        const targetSection = document.querySelector(targetId);
+                        if (targetSection) {
+                            const offsetTop = targetSection.offsetTop - 70;
+                            window.scrollTo({
+                                top: offsetTop,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                    
+                    // Close mobile menu if open
+                    if (navMenu.classList.contains('active')) {
+                        navMenu.classList.remove('active');
+                        navToggle.classList.remove('active');
+                        
+                        const bars = document.querySelectorAll('.bar');
+                        bars[0].style.transform = 'none';
+                        bars[1].style.opacity = '1';
+                        bars[2].style.transform = 'none';
+                    }
+                });
+            });
+            
+            // Navbar background on scroll
+            window.addEventListener('scroll', function() {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 100) {
+                    navbar.style.background = 'rgba(10, 10, 26, 0.98)';
+                    navbar.style.backdropFilter = 'blur(20px)';
+                } else {
+                    navbar.style.background = 'rgba(10, 10, 26, 0.95)';
+                    navbar.style.backdropFilter = 'blur(10px)';
+                }
+            });
+            
+            // Close menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.nav-container') && navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    navToggle.classList.remove('active');
+                    
+                    const bars = document.querySelectorAll('.bar');
+                    bars[0].style.transform = 'none';
+                    bars[1].style.opacity = '1';
+                    bars[2].style.transform = 'none';
+                }
+            });
+
+            // Add animation to technique cards on scroll
+            const techniqueCards = document.querySelectorAll('.technique-card');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            techniqueCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>

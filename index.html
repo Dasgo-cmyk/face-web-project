@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindMirror – AI Mental Health Analyzer</title>
+    <meta name="description" content="Platform analisis kesehatan mental berbasis AI dengan terapi musik dan latihan relaksasi personal">
+    
+    <!-- Security & Privacy Meta Tags -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' https://cdn.jsdelivr.net 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com 'unsafe-inline'; img-src 'self' https://images.unsplash.com data: blob:;">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <!-- Preload for Performance -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" as="style">
+    <link rel="preload" href="style.css" as="style">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
+</head>
+<body>
+    <!-- Skip Link for Accessibility -->
+    <a href="#main-content" class="skip-link">Langsung ke konten utama</a>
+
+    <!-- Background Animation -->
+    <div class="bg-animation">
+        <div class="stars"></div>
+        <div class="twinkling"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" aria-label="Navigasi Utama">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-text">MindMirror</span>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link">Beranda</a>
+                <a href="#analyzer" class="nav-link">Analisis</a>
+                <a href="#articles" class="nav-link">Artikel</a>
+                <a href="#team" class="nav-link">Tim Kami</a>
+            </div>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="container" id="main-content">
+        <!-- Hero Section -->
+        <section id="home" class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="title-main">MindMirror</span>
+                    <span class="title-sub">AI Mental Health Analyzer</span>
+                </h1>
+                <p class="hero-description">
+                    Platform inovatif yang menggunakan kecerdasan buatan untuk membantu Anda 
+                    memahami dan mengelola kesehatan mental melalui analisis ekspresi wajah 
+                    dengan terapi musik dan latihan personal.
+                </p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">95%</div>
+                        <div class="stat-label">Akurasi Deteksi</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Tersedia</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">🎵</div>
+                        <div class="stat-label">Terapi Musik</div>
+                    </div>
+                </div>
+                <a href="#analyzer" class="cta-button">
+                    <span class="cta-icon">🧠</span>
+                    Mulai Analisis Sekarang
+                </a>
+            </div>
+            <div class="hero-visual">
+                <div class="floating-cards">
+                    <div class="floating-card card-1">
+                        <i class="fas fa-smile" aria-hidden="true"></i>
+                        <span>Deteksi Emosi</span>
+                    </div>
+                    <div class="floating-card card-2">
+                        <i class="fas fa-music" aria-hidden="true"></i>
+                        <span>Terapi Musik</span>
+                    </div>
+                    <div class="floating-card card-3">
+                        <i class="fas fa-heart" aria-hidden="true"></i>
+                        <span>Dukungan Mental</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Analyzer Section -->
+        <section id="analyzer" class="analyzer-section">
+            <div class="section-header">
+                <h2>Analisis Kesehatan Mental</h2>
+                <p>Gunakan teknologi AI untuk memahami kondisi emosional Anda dengan terapi personal</p>
+            </div>
+
+            <div class="main-content">
+                <!-- Video Section -->
+                <div class="video-section">
+                    <div class="video-container">
+                        <video id="video" width="600" height="450" autoplay muted playsinline aria-label="Video feed untuk analisis wajah"></video>
+                        <canvas id="canvas" class="overlay" aria-hidden="true"></canvas>
+                        
+                        <!-- Video Overlay -->
+                        <div class="video-overlay" id="video-overlay">
+                            <div class="scan-line"></div>
+                            <div class="loading-text" id="loading-text">Memuat AI Model...</div>
+                        </div>
+                        
+                        <!-- Video Fallback -->
+                        <div class="video-fallback" id="video-fallback" style="display: none;">
+                            <div class="fallback-content">
+                                <i class="fas fa-video-slash" aria-hidden="true"></i>
+                                <h3>Kamera Tidak Dapat Diakses</h3>
+                                <p>Pastikan Anda memberikan izin akses kamera atau gunakan mode demo untuk mencoba fitur analisis.</p>
+                                <button id="retry-camera" class="btn btn-primary">
+                                    <i class="fas fa-redo" aria-hidden="true"></i>
+                                    Coba Lagi
+                                </button>
+                                <button id="demo-mode" class="btn btn-secondary">
+                                    <i class="fas fa-play" aria-hidden="true"></i>
+                                    Mode Demo
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Control Buttons -->
+                    <div class="control-buttons">
+                        <button id="start-btn" class="btn btn-primary" disabled>
+                            <span class="btn-icon">🎯</span>
+                            Mulai Analisis
+                        </button>
+                        <button id="stop-btn" class="btn btn-secondary" disabled>
+                            <span class="btn-icon">⏹️</span>
+                            Hentikan
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Results Section -->
+                <div class="results-section">
+                    <!-- Status Card -->
+                    <div class="status-card glass-card">
+                        <h3><i class="fas fa-info-circle" aria-hidden="true"></i> Status Sistem</h3>
+                        <div class="status-content">
+                            <div class="status-indicator">
+                                <div class="indicator-dot" id="status-dot"></div>
+                                <span id="status-text">Memuat model AI...</span>
+                            </div>
+                            <div class="face-count" id="face-count">
+                                <span class="count-number">0</span>
+                                <span class="count-label">wajah terdeteksi</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dominant Emotion Card -->
+                    <div class="emotion-card glass-card">
+                        <h3><i class="fas fa-star" aria-hidden="true"></i> Emosi Dominan</h3>
+                        <div class="emotion-content">
+                            <div class="emotion-icon" id="emotion-icon" aria-hidden="true">😊</div>
+                            <div class="emotion-details">
+                                <div class="emotion-name" id="emotion-name">-</div>
+                                <div class="emotion-confidence" id="emotion-confidence">-</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Psychological Insight -->
+                    <div class="insight-card glass-card">
+                        <h3><i class="fas fa-brain" aria-hidden="true"></i> Interpretasi Psikologis</h3>
+                        <div class="insight-content">
+                            <p id="insight-text">Mulai analisis untuk mendapatkan wawasan tentang kondisi emosional Anda.</p>
+                        </div>
+                    </div>
+
+                    <!-- Detailed Emotions -->
+                    <div class="details-card glass-card">
+                        <h3><i class="fas fa-chart-bar" aria-hidden="true"></i> Detail Ekspresi</h3>
+                        <div class="emotions-grid" id="emotions-grid">
+                            <!-- Emotion bars will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Actionable Therapy Section -->
+                    <div class="action-section">
+                        <!-- Music Therapy Card -->
+                        <div class="therapy-card glass-card">
+                            <h3><i class="fas fa-music" aria-hidden="true"></i> Terapi Musik & Relaksasi</h3>
+                            <div class="therapy-content">
+                                <div id="music-therapy">
+                                    <p class="therapy-message" id="therapy-message">
+                                        Mulai analisis untuk mendapatkan saran terapi personal
+                                    </p>
+                                    <div class="music-player" id="music-player" style="display: none;">
+                                        <audio controls id="therapy-audio" style="width: 100%; margin: 10px 0;" aria-label="Pemutar audio untuk terapi musik">
+                                            Browser Anda tidak mendukung elemen audio.
+                                        </audio>
+                                        <p class="activity-suggestion" id="activity-suggestion"></p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Quick Exercise -->
+                                <div class="quick-exercise" id="quick-exercise" style="display: none;">
+                                    <h4><i class="fas fa-spa" aria-hidden="true"></i> Latihan Cepat</h4>
+                                    <div class="exercise-steps" id="exercise-steps"></div>
+                                    <div class="exercise-timer">
+                                        <span id="timer-display">--:--</span>
+                                        <button id="start-exercise" class="btn btn-primary">Mulai Latihan</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Progress Tracking -->
+                        <div class="progress-card glass-card">
+                            <h3><i class="fas fa-chart-line" aria-hidden="true"></i> Progress Harian</h3>
+                            <div class="progress-content">
+                                <div class="emotion-stats">
+                                    <div class="stat">
+                                        <span class="stat-number" id="session-count">0</span>
+                                        <span class="stat-label">Sesi Hari Ini</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-number" id="calm-streak">0</span>
+                                        <span class="stat-label">Menit Tenang</span>
+                                    </div>
+                                </div>
+                                <div class="progress-ring">
+                                    <div class="ring-circle">
+                                        <span id="progress-percent">0%</span>
+                                    </div>
+                                    <span class="ring-label">Keseimbangan Emosi</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Articles Section -->
+        <section id="articles" class="articles-section">
+            <div class="section-header">
+                <h2>Artikel Kesehatan Mental</h2>
+                <p>Informasi dan tips untuk menjaga kesehatan mental Anda</p>
+            </div>
+
+            <div class="articles-grid">
+                <article class="article-card glass-card">
+                    <div class="article-image">
+                        <img src="emotion.jpg" alt="Memahami Emosi Dasar Manusia" loading="lazy">
+                    </div>
+                    <div class="article-content">
+                        <h3>Memahami Emosi Dasar Manusia</h3>
+                        <p class="article-excerpt">
+                            Pelajari tentang 6 emosi dasar manusia dan bagaimana mereka mempengaruhi 
+                            kesehatan mental serta cara mengelolanya dengan efektif.
+                        </p>
+                        <div class="article-meta">
+                            <span class="article-date"><i class="far fa-calendar" aria-hidden="true"></i> 28 Okt 2025</span>
+                            <span class="article-read-time"><i class="far fa-clock" aria-hidden="true"></i> 5 min read</span>
+                        </div>
+                        <a href="article-emosi.html" class="article-link">Baca Selengkapnya <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
+
+                <article class="article-card glass-card">
+                    <div class="article-image">
+                        <img src="relaksasi.jpg" alt="Teknik Relaksasi" loading="lazy">
+                    </div>
+                    <div class="article-content">
+                        <h3>Teknik Relaksasi untuk Mengurangi Stres</h3>
+                        <p class="article-excerpt">
+                            Teknik pernapasan, meditasi, dan mindfulness yang dapat membantu 
+                            mengurangi stres dan meningkatkan kesejahteraan mental.
+                        </p>
+                        <div class="article-meta">
+                            <span class="article-date"><i class="far fa-calendar" aria-hidden="true"></i> 30 Okt 2025</span>
+                            <span class="article-read-time"><i class="far fa-clock" aria-hidden="true"></i> 7 min read</span>
+                        </div>
+                        <a href="article-relaksasi-optimized.html" class="article-link">Baca Selengkapnya <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
+
+                <article class="article-card glass-card">
+                    <div class="article-image">
+                        <img src="sosial.jpg" alt="Dukungan Sosial" loading="lazy">
+                    </div>
+                    <div class="article-content">
+                        <h3>Pentingnya Dukungan Sosial untuk Kesehatan Mental</h3>
+                        <p class="article-excerpt">
+                            Bagaimana hubungan sosial yang sehat dapat meningkatkan ketahanan mental 
+                            dan membantu melalui masa-masa sulit.
+                        </p>
+                        <div class="article-meta">
+                            <span class="article-date"><i class="far fa-calendar" aria-hidden="true"></i> 30 Okt 2025</span>
+                            <span class="article-read-time"><i class="far fa-clock" aria-hidden="true"></i> 6 min read</span>
+                        </div>
+                        <a href="artikel-dukungan-sosial.html" class="article-link">Baca Selengkapnya <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section id="team" class="team-section">
+            <div class="section-header">
+                <h2>Tim Pengembang</h2>
+                <p>Orang-orang di balik terciptanya MindMirror</p>
+            </div>
+
+            <div class="team-grid">
+                <div class="team-member glass-card">
+                    <div class="team-photo-container">
+                        <img src="none" alt="Tim MindMirror" class="team-photo" loading="lazy">
+                    </div>
+                    <div class="member-info">
+                        <h3>Tim MindMirror</h3>
+                        <p class="member-role">Pengembang & Spesialis</p>
+                        <p class="member-bio">
+                            Tim kami terdiri dari para profesional di bidang teknologi, psikologi, dan desain 
+                            yang berdedikasi untuk menciptakan solusi inovatif dalam kesehatan mental. 
+                            Dengan kombinasi keahlian dalam AI, pengembangan perangkat lunak, dan psikologi klinis, 
+                            kami bekerja sama untuk menghadirkan platform yang dapat membantu masyarakat 
+                            memahami dan mengelola kesehatan mental mereka dengan lebih baik.
+                        </p>
+                        <div class="member-skills">
+                            <span class="skill-tag">AI Development</span>
+                            <span class="skill-tag">Psychology</span>
+                            <span class="skill-tag">Web Development</span>
+                            <span class="skill-tag">UI/UX Design</span>
+                            <span class="skill-tag">Mental Health</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about-section">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Tentang MindMirror</h2>
+                    <p>
+                        MindMirror adalah platform inovatif yang menggabungkan teknologi kecerdasan buatan 
+                        dengan prinsip psikologi untuk membantu masyarakat memahami dan mengelola kesehatan 
+                        mental mereka.
+                    </p>
+                    <p>
+                        Dengan menggunakan analisis ekspresi wajah secara real-time, kami memberikan 
+                        wawasan tentang kondisi emosional pengguna dan saran yang sesuai berdasarkan 
+                        prinsip psikologi yang terpercaya.
+                    </p>
+                    <div class="about-features">
+                        <div class="feature-item">
+                            <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                            <span>Privasi Terjaga</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+                            <span>Berdasarkan Penelitian</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-music" aria-hidden="true"></i>
+                            <span>Terapi Musik</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-hand-holding-heart" aria-hidden="true"></i>
+                            <span>Non-Judgmental</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-visual">
+                    <div class="visual-card">
+                        <i class="fas fa-rocket" aria-hidden="true"></i>
+                        <h3>Misi Kami</h3>
+                        <p>Membuat kesehatan mental lebih mudah diakses dan dipahami oleh semua orang dengan teknologi AI yang humanis</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>MindMirror</h3>
+                <p>Platform analisis kesehatan mental berbasis AI yang membantu Anda memahami kondisi emosional dengan terapi personal.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Menu Cepat</h4>
+                <a href="#home">Beranda</a>
+                <a href="#analyzer">Analisis</a>
+                <a href="#articles">Artikel</a>
+                <a href="#team">Tim Kami</a>
+            </div>
+            <div class="footer-section">
+                <h4>Kontak</h4>
+                <p><i class="fas fa-envelope" aria-hidden="true"></i> hello@mindmirror.com</p>
+                <p><i class="fas fa-phone" aria-hidden="true"></i> +62 21 1234 5678</p>
+                <p><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Malang, Indonesia</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Dibuat dengan <span class="heart" aria-hidden="true">💙</span> untuk Kesadaran Kesehatan Mental | &copy; 2025 MindMirror. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Load face-api.js TANPA async -->
+    <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+    
+    <!-- Load JavaScript -->
+    <script src="script.js"></script>
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "MindMirror - AI Mental Health Analyzer",
+      "description": "Platform analisis kesehatan mental berbasis AI dengan terapi musik dan latihan relaksasi personal",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "Any",
+      "permissions": "camera",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "IDR"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "MindMirror Team"
+      }
+    }
+    </script>
+</body>
+</html>

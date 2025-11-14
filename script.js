@@ -127,8 +127,8 @@ const konfigurasiTerapi = {
     happy: {
         pesan: "Lagu semangat untuk pertahankan energi positifmu! 🎉",
         trek: [
-            {nama: "Positive Vibes", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"},
-            {nama: "Sunshine Melody", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"}
+            {nama: "Positive Vibes", file: "music/happy1.mp3"},
+            {nama: "Sunshine Melody", file: "music/happy1.mp3"}
         ],
         aktivitas: "Coba bergoyang mengikuti irama sambil tersenyum!",
         latihan: {
@@ -145,8 +145,8 @@ const konfigurasiTerapi = {
     sad: {
         pesan: "Musik menenangkan untuk membantumu merasa lebih baik 🌊",
         trek: [
-            {nama: "Healing Piano", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"},
-            {nama: "Calming Waves", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"}
+            {nama: "Healing Piano", file: "music/sad1.mp3"},
+            {nama: "Calming Waves", file: "music/sad1.mp3"}
         ],
         aktivitas: "Dengarkan sambil menutup mata dan bernapas dalam",
         latihan: {
@@ -164,8 +164,8 @@ const konfigurasiTerapi = {
     angry: {
         pesan: "Suara alam untuk meredakan ketegangan dan amarah 🌿",
         trek: [
-            {nama: "Forest Calm", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3"},
-            {nama: "Ocean Peace", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3"}
+            {nama: "Forest Calm", file: "music/angry1.mp3"},
+            {nama: "Ocean Peace", file: "music/angry1.mp3"}
         ],
         aktivitas: "Fokus pada suara alam sambil menenangkan diri",
         latihan: {
@@ -182,8 +182,8 @@ const konfigurasiTerapi = {
     fearful: {
         pesan: "Musik grounding untuk membantumu merasa aman 🛡️",
         trek: [
-            {nama: "Safe Space", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3"},
-            {nama: "Protective Melody", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3"}
+            {nama: "Safe Space", file: "music/fearful1.mp3"},
+            {nama: "Protective Melody", file: "music/fearful2.mp3"}
         ],
         aktivitas: "Dengarkan sambil merasakan kaki menapak lantai",
         latihan: {
@@ -198,20 +198,56 @@ const konfigurasiTerapi = {
             durasi: 60
         }
     },
+    surprised: {
+        pesan: "Musik inspiratif untuk eksplorasi hal baru! 🌟",
+        trek: [
+            {nama: "Adventure Theme", file: "music/surprised1.mp3"},
+            {nama: "Discovery Sound", file: "music/surprised1.mp3"}
+        ],
+        aktivitas: "Dengarkan sambil membayangkan petualangan baru",
+        latihan: {
+            judul: "Curiosity Expansion",
+            langkah: [
+                "Pikirkan 3 hal baru yang ingin dipelajari",
+                "Bayangkan menjelajahi tempat baru",
+                "Tulis satu ide kreatif yang muncul",
+                "Rencanakan satu langkah kecil untuk eksplorasi"
+            ],
+            durasi: 90
+        }
+    },
+    disgusted: {
+        pesan: "Musik pembersihan untuk menyegarkan pikiran 🍃",
+        trek: [
+            {nama: "Purification", file: "music/disgusted1.mp3"},
+            {nama: "Renewal Melody", file: "music/disgusted2.mp3"}
+        ],
+        aktivitas: "Dengarkan sambil membayangkan pelepasan beban",
+        latihan: {
+            judul: "Emotional Cleansing",
+            langkah: [
+                "Tarik napas dalam, bayangkan energi negatif keluar",
+                "Visualisasi membuang hal yang tidak dibutuhkan",
+                "Tulis hal yang ingin dilepaskan",
+                "Tarik napas, terima kedamaian"
+            ],
+            durasi: 120
+        }
+    },
     neutral: {
         pesan: "Musik fokus untuk pertahankan keseimbanganmu ⚖️",
         trek: [
-            {nama: "Focus Flow", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3"},
-            {nama: "Mindful Moments", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3"}
+            {nama: "Focus Flow", file: "music/neutral1.mp3"},
+            {nama: "Mindful Moments", file: "music/neutral1.mp3"}
         ],
-        aktivitas: "Ideal untuk bekerja atau belajar dengan fokus",
+        aktivitas: "netral saja tidak cukup,ayo bersemangat untuk hari ini.",
         latihan: {
             judul: "Mindful Awareness", 
             langkah: [
                 "Perhatikan sensasi napas masuk-keluar",
-                "Amati tubuh tanpa penilaian",
-                "Perhatikan pikiran yang datang-pergi",
-                "Kembali fokus ke napas"
+                "Nikmati musik",
+                "Bayangkan hal beruntung datang kepadamu",
+                "Nikmati suasana lagu"
             ],
             durasi: 180
         }
@@ -253,6 +289,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         inisialisasiNavigasi();
         inisialisasiAnimasiScroll();
         inisialisasiGridEmosi();
+        setupMusicUpload(); // Setup upload musik
         
         // Mulai loading model AI
         muatModel();
@@ -278,6 +315,92 @@ function inisialisasiElemen() {
         canvas.height = video.videoHeight;
         console.log('📐 Dimensi video:', video.videoWidth, 'x', video.videoHeight);
     });
+}
+
+// Setup upload musik
+function setupMusicUpload() {
+    // Cek apakah elemen upload sudah ada, jika belum buat
+    let uploadContainer = document.getElementById('music-upload-container');
+    if (!uploadContainer) {
+        uploadContainer = document.createElement('div');
+        uploadContainer.id = 'music-upload-container';
+        uploadContainer.style.margin = '10px 0';
+        uploadContainer.style.textAlign = 'center';
+        
+        const uploadButton = document.createElement('button');
+        uploadButton.id = 'music-upload-btn';
+        uploadButton.innerHTML = '🎵 Upload Musik Anda';
+        uploadButton.className = 'upload-button';
+        
+        const uploadInput = document.createElement('input');
+        uploadInput.type = 'file';
+        uploadInput.id = 'music-upload';
+        uploadInput.accept = 'audio/*';
+        uploadInput.multiple = true;
+        uploadInput.style.display = 'none';
+        
+        const uploadInfo = document.createElement('div');
+        uploadInfo.id = 'upload-info';
+        uploadInfo.style.fontSize = '12px';
+        uploadInfo.style.marginTop = '5px';
+        uploadInfo.style.color = '#888';
+        
+        uploadButton.onclick = () => uploadInput.click();
+        
+        uploadContainer.appendChild(uploadButton);
+        uploadContainer.appendChild(uploadInput);
+        uploadContainer.appendChild(uploadInfo);
+        
+        // Tambahkan ke music player section
+        const musicPlayer = document.getElementById('music-player');
+        if (musicPlayer) {
+            musicPlayer.appendChild(uploadContainer);
+        }
+    }
+    
+    // Handle file selection
+    const uploadInput = document.getElementById('music-upload');
+    uploadInput.addEventListener('change', function(e) {
+        const files = e.target.files;
+        if (files.length > 0) {
+            playUploadedMusic(files[0]);
+        }
+    });
+}
+
+// Fungsi untuk memutar musik yang diupload
+function playUploadedMusic(file) {
+    const elemenAudio = document.getElementById('therapy-audio');
+    const uploadInfo = document.getElementById('upload-info');
+    
+    // Validasi file audio
+    if (!file.type.startsWith('audio/')) {
+        uploadInfo.textContent = '❌ File harus berupa audio (MP3, WAV, etc.)';
+        uploadInfo.style.color = '#e74c3c';
+        return;
+    }
+    
+    const objectURL = URL.createObjectURL(file);
+    
+    elemenAudio.src = objectURL;
+    elemenAudio.volume = 0.7;
+    
+    // Update UI
+    document.getElementById('therapy-message').textContent = `Memutar: ${file.name}`;
+    document.getElementById('activity-suggestion').textContent = "Musik custom Anda sedang diputar";
+    document.getElementById('music-player').style.display = 'block';
+    
+    uploadInfo.textContent = `✅ Loaded: ${file.name}`;
+    uploadInfo.style.color = '#2ecc71';
+    
+    // Coba auto-play
+    const janjiPutar = elemenAudio.play();
+    if (janjiPutar !== undefined) {
+        janjiPutar.catch(error => {
+            console.log("Auto-play dicegah:", error);
+            document.getElementById('activity-suggestion').textContent = "Klik play untuk memulai musik yang diupload.";
+        });
+    }
 }
 
 // Setup event listeners untuk tombol
@@ -939,18 +1062,17 @@ function mulaiTerapiMusik(emosi) {
     // Pilih track random
     const trekAcak = terapi.trek[Math.floor(Math.random() * terapi.trek.length)];
     
-    // Set audio source
-    elemenAudio.src = trekAcak.url;
+    // Gunakan file lokal (path relatif)
+    elemenAudio.src = trekAcak.file;
     elemenAudio.volume = 0.7;
     
     pemutarMusik.style.display = 'block';
     
-    // Coba auto-play (browser mungkin membutuhkan interaksi user terlebih dahulu)
+    // Coba auto-play
     const janjiPutar = elemenAudio.play();
     if (janjiPutar !== undefined) {
         janjiPutar.catch(error => {
             console.log("Auto-play dicegah:", error);
-            // Tampilkan instruksi untuk memutar manual
             document.getElementById('activity-suggestion').textContent += " Klik play untuk memulai musik.";
         });
     }

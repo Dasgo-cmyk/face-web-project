@@ -816,6 +816,9 @@ function hentikanAnalisis() {
     // Tampilkan wawasan psikologis setelah analisis dihentikan
     if (emosiTerakhirTerdeteksi) {
         tampilkanWawasanPascaAnalisis(emosiTerakhirTerdeteksi, kepercayaanEmosiTerakhir);
+        
+        // NEW: Otomatis jalankan terapi musik setelah analisis selesai
+        mulaiTerapiMusikOtomatis(emosiTerakhirTerdeteksi);
     }
     
     // Reset UI
@@ -825,6 +828,76 @@ function hentikanAnalisis() {
     // Update tombol
     document.getElementById('start-btn').disabled = false;
     document.getElementById('stop-btn').disabled = true;
+}
+
+// NEW: Memulai terapi musik otomatis setelah analisis selesai
+function mulaiTerapiMusikOtomatis(emosi) {
+    const terapi = konfigurasiTerapi[emosi];
+    if (!terapi) return;
+    
+    console.log('🎵 Memulai terapi musik otomatis untuk emosi:', emosi);
+    
+    // Update pesan
+    document.getElementById('therapy-message').textContent = terapi.pesan;
+    document.getElementById('activity-suggestion').textContent = terapi.aktivitas;
+    
+    // Setup music player
+    const pemutarMusik = document.getElementById('music-player');
+    const elemenAudio = document.getElementById('therapy-audio');
+    
+    // Pilih track random
+    const trekAcak = terapi.trek[Math.floor(Math.random() * terapi.trek.length)];
+    
+    // Gunakan file lokal (path relatif)
+    elemenAudio.src = trekAcak.file;
+    elemenAudio.volume = 0.7;
+    
+    // Tampilkan music player
+    pemutarMusik.style.display = 'block';
+    
+    // Auto-play musik setelah analisis selesai
+    setTimeout(() => {
+        const janjiPutar = elemenAudio.play();
+        if (janjiPutar !== undefined) {
+            janjiPutar.then(() => {
+                console.log('✅ Musik berhasil diputar otomatis');
+                // Update UI untuk menunjukkan musik sedang diputar
+                document.getElementById('activity-suggestion').textContent = 
+                    terapi.aktivitas + " (Musik sedang diputar otomatis)";
+            }).catch(error => {
+                console.log("❌ Auto-play dicegah:", error);
+                // Tampilkan instruksi manual
+                document.getElementById('activity-suggestion').textContent = 
+                    "Klik tombol play untuk memulai musik terapi.";
+                
+                // Tampilkan tombol play yang lebih mencolok
+                const customPlayButton = document.createElement('button');
+                customPlayButton.innerHTML = '▶ Putar Musik Terapi';
+                customPlayButton.className = 'play-button';
+                customPlayButton.style.margin = '10px auto';
+                customPlayButton.style.padding = '10px 20px';
+                customPlayButton.style.background = 'var(--primary-color)';
+                customPlayButton.style.color = 'white';
+                customPlayButton.style.border = 'none';
+                customPlayButton.style.borderRadius = '25px';
+                customPlayButton.style.cursor = 'pointer';
+                customPlayButton.style.display = 'block';
+                
+                customPlayButton.onclick = function() {
+                    elemenAudio.play();
+                    customPlayButton.style.display = 'none';
+                    document.getElementById('activity-suggestion').textContent = 
+                        terapi.aktivitas + " (Musik sedang diputar)";
+                };
+                
+                // Tambahkan tombol jika belum ada
+                const existingButton = document.querySelector('.play-button');
+                if (!existingButton) {
+                    pemutarMusik.appendChild(customPlayButton);
+                }
+            });
+        }
+    }, 1000); // Delay 1 detik setelah analisis selesai
 }
 
 // Tampilkan wawasan psikologis setelah analisis dihentikan
@@ -846,6 +919,10 @@ function tampilkanWawasanPascaAnalisis(jenisEmosi, kepercayaan) {
             </div>
             <div class="result-insight">
                 ${wawasanAcak}
+            </div>
+            <div class="result-suggestion">
+                <i class="fas fa-music" style="color: var(--primary-color);"></i>
+                <strong>Terapi Musik:</strong> Musik ${emosi.label.toLowerCase()} sedang diputar otomatis untukmu.
             </div>
             <div class="result-suggestion">
                 <i class="fas fa-lightbulb" style="color: var(--primary-color);"></i>
@@ -971,8 +1048,7 @@ function prosesEmosi(deteksi) {
         // Berikan interpretasi psikologis
         berikanWawasanPsikologis(emosi);
         
-        // Mulai fitur terapi
-        mulaiTerapiMusik(ekspresiDominan);
+        // Setup latihan (tanpa memulai musik otomatis di sini)
         setupLatihan(ekspresiDominan);
     }
 }
@@ -1046,7 +1122,7 @@ function berikanWawasanPsikologis(emosi) {
 
 // ===== FUNGSI TERAPI MUSIK & LATIHAN =====
 
-// Memulai terapi musik
+// Memulai terapi musik (fungsi lama, tetap dipertahankan untuk kompatibilitas)
 function mulaiTerapiMusik(emosi) {
     const terapi = konfigurasiTerapi[emosi];
     if (!terapi) return;
@@ -1073,7 +1149,7 @@ function mulaiTerapiMusik(emosi) {
     if (janjiPutar !== undefined) {
         janjiPutar.catch(error => {
             console.log("Auto-play dicegah:", error);
-            document.getElementById('activity-suggestion').textContent += " Klik play untuk memulai musik.";
+            document.getElementById('activity-suggestion').textContent = "Klik play untuk memulai musik.";
         });
     }
 }
